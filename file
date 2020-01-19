@@ -1,0 +1,25 @@
+void printMatrix(int ** matrix, int rows, int cols) 
+{
+	for (int r = 0; r < rows; r++)
+	{
+		for (int c = 0; c < cols; c++)
+		{
+			std::cout << matrix[r][c] << "\t";
+		}
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+}
+void fillMAtrixRandom(int ** matrix, int rows, int cols, int min = 55, int max = 155)
+{
+	srand(time(0));
+	int range = max - min + 1;
+
+	for (int r = 0; r < rows; r++)
+	{
+		for (int c = 0; c < cols; c++)
+		{
+			matrix[r][c] = rand() % range + min;
+		}
+	}
+}
