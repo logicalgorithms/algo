@@ -23,3 +23,60 @@ void fillMAtrixRandom(int ** matrix, int rows, int cols, int min = 55, int max =
 		}
 	}
 }
+
+char * stringModifier(char * numbers, int fNumber, bool& containsLastNumbers)
+{
+	int newlength = getLength(numbers);
+
+	char * result = new char [newlength + 1];
+
+	for (int i = 0, j= 0; i < strlen(numbers); i++, j++)
+	{
+		if ((numbers[i] - '0') + i > 9)
+		{
+			int num = ((numbers[i] - '0') + i);
+			result[j] = num / 10 + '0';
+			j++;
+			result[j] = num % 10 +  '0';
+		}
+		else
+		{
+			result[j] = ((numbers[i] - '0') + i) + '0';
+		}
+	}
+	result[newlength] = '\0';
+	std::cout << result;
+	int lastFNumbers[3];
+	lastFNumbers[2] = fNumber % 10;
+	lastFNumbers[1] = fNumber / 10 % 10;
+	lastFNumbers[0] = fNumber / 100 % 10;
+	containsLastNumbers = false;
+	bool d1, d2, d3;
+	d1 = false;
+	d2 = false;
+	d3 = false;
+	for (int i = 0; i < newlength; i++)
+	{
+		int num = result[i] - '0';
+		if (num == lastFNumbers[2])
+		{
+			d1 = true;
+		}
+		else if (num == lastFNumbers[1])
+		{
+			d2 = true;
+		}
+		else if (num == lastFNumbers[0])
+		{
+			d3 = true;
+		}
+
+		if (d1 && d2 && d3)
+		{
+			containsLastNumbers = true;
+			break;
+		}
+	}
+
+	return result;
+}
