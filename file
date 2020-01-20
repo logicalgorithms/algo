@@ -1,7 +1,7 @@
 char * stb(char * t, char * u)
 {
 	int length = strlen(u);
-	char * bitmask = new char[strlen(universal) + 1]{'0'};
+	char * btmask = new char[strlen(universal) + 1]{'0'};
 
 	for (int i = 0; i < length; i++)
 	{
@@ -16,7 +16,31 @@ char * stb(char * t, char * u)
 		}
 	}
 	bitmask[length] = '\0';
-	return bitmask;
+	return btmask;
+}
+
+char * bitMaskToSet(char*mask, char* u)
+{
+
+	int length = 1;
+	for (int i = 0; mask[i]; i++)
+	{
+		if (mask[i] == '1')
+		{
+			length++;
+		}
+	}
+	char * set = new char[length];
+	for (int i = 0, j = 0; mask[i]; i++)
+	{
+		if (mask[i] == '1')
+		{
+			set[j] = u[i];
+			j++;
+		}
+	}
+	set[length - 1] = '\0';
+	return set;
 }
 
 
