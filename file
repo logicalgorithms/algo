@@ -1,82 +1,22 @@
-void printMatrix(int ** matrix, int rows, int cols) 
+char * stb(char * t, char * u)
 {
-	for (int r = 0; r < rows; r++)
-	{
-		for (int c = 0; c < cols; c++)
-		{
-			std::cout << matrix[r][c] << "\t";
-		}
-		std::cout << std::endl;
-	}
-	std::cout << std::endl;
-}
-void fillMAtrixRandom(int ** matrix, int rows, int cols, int min = 55, int max = 155)
-{
-	srand(time(0));
-	int range = max - min + 1;
+	int length = strlen(u);
+	char * bitmask = new char[strlen(universal) + 1]{'0'};
 
-	for (int r = 0; r < rows; r++)
+	for (int i = 0; i < length; i++)
 	{
-		for (int c = 0; c < cols; c++)
+		bitmask[i] = '0';
+		for (int j = 0; j < strlen(t); j++)
 		{
-			matrix[r][c] = rand() % range + min;
+			if (t[j] == u[i])
+			{
+				bitmask[i] = '1';
+				break;
+			}
 		}
 	}
+	bitmask[length] = '\0';
+	return bitmask;
 }
 
-char * stringModifier(char * numbers, int fNumber, bool& containsLastNumbers)
-{
-	int newlength = getLength(numbers);
 
-	char * result = new char [newlength + 1];
-
-	for (int i = 0, j= 0; i < strlen(numbers); i++, j++)
-	{
-		if ((numbers[i] - '0') + i > 9)
-		{
-			int num = ((numbers[i] - '0') + i);
-			result[j] = num / 10 + '0';
-			j++;
-			result[j] = num % 10 +  '0';
-		}
-		else
-		{
-			result[j] = ((numbers[i] - '0') + i) + '0';
-		}
-	}
-	result[newlength] = '\0';
-	std::cout << result;
-	int lastFNumbers[3];
-	lastFNumbers[2] = fNumber % 10;
-	lastFNumbers[1] = fNumber / 10 % 10;
-	lastFNumbers[0] = fNumber / 100 % 10;
-	containsLastNumbers = false;
-	bool d1, d2, d3;
-	d1 = false;
-	d2 = false;
-	d3 = false;
-	for (int i = 0; i < newlength; i++)
-	{
-		int num = result[i] - '0';
-		if (num == lastFNumbers[2])
-		{
-			d1 = true;
-		}
-		else if (num == lastFNumbers[1])
-		{
-			d2 = true;
-		}
-		else if (num == lastFNumbers[0])
-		{
-			d3 = true;
-		}
-
-		if (d1 && d2 && d3)
-		{
-			containsLastNumbers = true;
-			break;
-		}
-	}
-
-	return result;
-}
