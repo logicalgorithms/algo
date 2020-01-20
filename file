@@ -43,4 +43,30 @@ char * bitMaskToSet(char*mask, char* u)
 	return set;
 }
 
+void basicComb(int * set, int size, int k, int curr, int cnt1, int cnt0){
+	
+	if(curr==sz) printArray(set, size);
+	else{
+		if(cnt1 < k){
+			set[curr] = 1;
+			basicComb(set, size, k, curr+1, cnt1+1, cnt0);
+		}
+		if(cnt0 < sz-k){
+			set[curr] = 0;
+			basicComb(set, size, k, curr+1, cnt1, cnt0+1);
+		}
+	}
+}
+
+// bigger than k 
+
+set[current] = '1';
+comb(set, size, k, onesCounter + 1, zerosCounter, current + 1);
+if (size - zerosCounter > k + 1)
+{
+	set[current] = '0';
+	comb(set, size, k, onesCounter , zerosCounter + 1, current + 1);
+			
+}
+
 
