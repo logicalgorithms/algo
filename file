@@ -19,7 +19,7 @@ char * stb(char * t, char * u)
 	return btmask;
 }
 
-char * bitMaskToSet(char*mask, char* u)
+char * btoS(char*mask, char* u)
 {
 
 	int length = 1;
@@ -69,4 +69,69 @@ if (size - zerosCounter > k + 1)
 			
 }
 
+---------------------------------------------------
+// with element k
+int pos = 0;
+for (int i = 0; i < strlen(u); i++)
+{
+	if (u[i] == k)
+	{
+		pos = i;
+	}
+}
 
+if (cur == pos)
+{
+	set[cur] = '1';
+	combWithElementK(u, set, size, k, cur + 1);
+}
+else
+{
+	set[current] = '1';
+	combWithElementK(u, set, size, k, cur + 1);
+	set[current] = '0';
+	combWithElementK(u, set, size, k, cur + 1);
+}
+
+
+------------------------------------------------------
+void combWithSet(char * universal, char * set, int size, char * elements , int elementsSize, int current)
+{
+	if (current == size)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			cout << set[i];
+		}
+		cout << endl;
+	}
+	else
+	{
+		bool * elementsPosition = new bool[size] {0};
+		for (int i = 0; i < elementsSize; i++)
+		{
+			for (int j = 0; j < size; j++)
+			{
+				if (universal[j] == elements[i])
+				{
+					elementsPosition[j] = 1;
+					break;
+				}
+			}
+		}
+
+		if (elementsPosition[current])
+		{
+			set[current] = '1';
+			combWithSet(universal, set, size, elements,elementsSize ,  current + 1);
+		}
+		else
+		{
+			set[current] = '1';
+			combWithSet(universal, set, size, elements, elementsSize, current + 1);
+			set[current] = '0';
+			combWithSet(universal, set, size, elements, elementsSize, current + 1);
+		}
+	}
+	
+}
